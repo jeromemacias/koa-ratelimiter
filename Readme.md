@@ -20,10 +20,26 @@
 $ npm install koa-ratelimit
 ```
 
-## Example
+## Usage
+
+The library exports 3 things:
+- default: a factory accepting a `ratelimiter` adapter and which a function with options to build the middleware
+- `redisRateLimit`: an helper function returning a middleware initialized with a redisAdapter
+- `memoryRateLimit`: an helper function returning a middleware initialized with a memoryAdapter
+
+## redisRateLimit
+
+### Options
+
+ - `db` redis connection instance
+ - `max` max requests within `duration` [2500]
+ - `duration` of limit in milliseconds [3600000]
+ - `id` id to compare requests [ip]
+
+### Example
 
 ```js
-var ratelimit = require('koa-ratelimit');
+var ratelimit = require('koa-ratelimit').redisRateLimit;
 var redis = require('redis');
 var koa = require('koa');
 var app = koa();
@@ -49,12 +65,77 @@ app.listen(3000);
 console.log('listening on port 3000');
 ```
 
-## Options
+## memoryRateLimit
 
- - `db` redis connection instance
+### Options
+
  - `max` max requests within `duration` [2500]
  - `duration` of limit in milliseconds [3600000]
  - `id` id to compare requests [ip]
+
+### Example
+
+```js
+var ratelimit = require('koa-ratelimit').memoryRateLimit;
+var koa = require('koa');
+var app = koa();
+
+// apply rate limit
+
+app.use(ratelimit({
+  duration: 60000,
+  max: 100,
+  id: function (context) {
+    return context.ip;
+  }
+}));
+
+// response middleware
+
+app.use(function *(){
+  this.body = 'Stuff!';
+});
+
+app.listen(3000);
+console.log('listening on port 3000');
+```
+
+## custom adapter
+
+To learn more about what a custom adapter should be, please refer to the `ratelimiter` [documentation](https://github.com/marmelab/node-ratelimiter/tree/adapters)
+
+### Options
+
+ - `max` max requests within `duration` [2500]
+ - `duration` of limit in milliseconds [3600000]
+ - `id` id to compare requests [ip]
+
+### Example
+
+```js
+var ratelimitFactory = require('koa-ratelimit');
+var koa = require('koa');
+var app = koa();
+var myCustomAdapter = require('./myCustomAdapter');
+// apply rate limit
+
+app.use(ratelimitFactory(myCustomAdapter)({
+  duration: 60000,
+  max: 100,
+  id: function (context) {
+    return context.ip;
+  }
+}));
+
+// response middleware
+
+app.use(function *(){
+ this.body = 'Stuff!';
+});
+
+app.listen(3000);
+console.log('listening on port 3000');
+```
 
 ## Responses
 

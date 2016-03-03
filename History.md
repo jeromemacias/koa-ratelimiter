@@ -1,3 +1,7 @@
+3.0.0 / 2016-03-01
+==================
+* rewritten using es6 with babel
+* uses new node/rate-limiter with adapters
 
 2.1.0 / 2015-01-04
 ==================

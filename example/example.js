@@ -1,5 +1,5 @@
 
-var ratelimit = require('./');
+var ratelimit = require('./').redisRateLimit;
 var redis = require('redis');
 var koa = require('koa');
 var app = koa();
