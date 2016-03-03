@@ -12,7 +12,7 @@
     "rate"
   ],
   "files": [
-    "index.js"
+    "lib/index.js"
   ],
   "dependencies": {
     "debug": "^2.1.1",
