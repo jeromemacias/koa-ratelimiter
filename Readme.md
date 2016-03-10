@@ -67,6 +67,9 @@ console.log('listening on port 3000');
 
 ## memoryRateLimit
 
+This mode uses the memoryAdapter of node-ratelimiter. It should only be used
+in development.
+
 ### Options
 
  - `max` max requests within `duration` [2500]
@@ -100,6 +103,31 @@ app.listen(3000);
 console.log('listening on port 3000');
 ```
 
+## nullRateLimit
+
+This mode uses the nullAdapter of node-ratelimiter. It should only be used
+for testing purposes.
+
+### Example
+
+```js
+var ratelimit = require('koa-ratelimit').nullRateLimit;
+var koa = require('koa');
+var app = koa();
+
+// apply rate limit
+
+app.use(ratelimit({}));
+
+// response middleware
+
+app.use(function *(){
+  this.body = 'Stuff!';
+});
+
+app.listen(3000);
+console.log('listening on port 3000');
+```
 ## custom adapter
 
 To learn more about what a custom adapter should be, please refer to the `ratelimiter` [documentation](https://github.com/marmelab/node-ratelimiter/tree/adapters)

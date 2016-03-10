@@ -3,7 +3,7 @@
  */
 
 import debugFactory from 'debug';
-import Limiter, { memoryAdapter, redisAdapter } from 'ratelimiter';
+import Limiter, { memoryAdapter, nullAdapter, redisAdapter } from 'ratelimiter';
 import ms from 'ms';
 
 const debug = debugFactory('koa-ratelimit');
@@ -53,6 +53,8 @@ const middlewareFactory = (adapter = memoryAdapter()) => opts => function* middl
 };
 
 export default middlewareFactory;
+
+export const nullRateLimit = opts => middlewareFactory(nullAdapter())(opts);
 
 export const memoryRateLimit = opts => middlewareFactory(memoryAdapter())(opts);
 
