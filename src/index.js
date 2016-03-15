@@ -3,7 +3,7 @@
  */
 
 import debugFactory from 'debug';
-import Limiter, { memoryAdapter, nullAdapter, redisAdapter } from 'ratelimiter';
+import Limiter, { memoryAdapter, nullAdapter, redisAdapter } from 'node-ratelimiter';
 import ms from 'ms';
 
 const debug = debugFactory('koa-ratelimit');

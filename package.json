@@ -1,7 +1,7 @@
 {
-  "name": "koa-ratelimit",
+  "name": "koa-ratelimiter",
   "description": "Rate limiter middleware for koa",
-  "repository": "koajs/ratelimit",
+  "repository": "marmelab/ratelimit",
   "version": "3.0.0",
   "main": "lib/index.js",
   "keywords": [
@@ -17,7 +17,7 @@
   "dependencies": {
     "debug": "^2.1.1",
     "ms": "^0.7.0",
-    "ratelimiter": "marmelab/node-ratelimiter"
+    "node-ratelimiter": "~3.0.0"
   },
   "devDependencies": {
     "babel-cli": "~6.6.0",
