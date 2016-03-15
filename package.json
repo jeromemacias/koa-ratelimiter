@@ -1,7 +1,7 @@
 {
   "name": "koa-ratelimiter",
   "description": "Rate limiter middleware for koa",
-  "repository": "marmelab/ratelimit",
+  "repository": "marmelab/koa-ratelimiter",
   "version": "3.0.0",
   "main": "lib/index.js",
   "keywords": [
