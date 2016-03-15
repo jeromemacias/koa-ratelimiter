@@ -1,5 +1,5 @@
 
-# koa-ratelimit
+# koa-ratelimiter
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -17,7 +17,7 @@
 ## Installation
 
 ```js
-$ npm install koa-ratelimit
+$ npm install koa-ratelimiter
 ```
 
 ## Usage
@@ -39,14 +39,14 @@ The library exports 3 things:
 ### Example
 
 ```js
-var ratelimit = require('koa-ratelimit').redisRateLimit;
+var ratelimiter = require('koa-ratelimiter').redisRateLimit;
 var redis = require('redis');
 var koa = require('koa');
 var app = koa();
 
 // apply rate limit
 
-app.use(ratelimit({
+app.use(ratelimiter({
   db: redis.createClient(),
   duration: 60000,
   max: 100,
@@ -79,13 +79,13 @@ in development.
 ### Example
 
 ```js
-var ratelimit = require('koa-ratelimit').memoryRateLimit;
+var ratelimiter = require('koa-ratelimiter').memoryRateLimit;
 var koa = require('koa');
 var app = koa();
 
 // apply rate limit
 
-app.use(ratelimit({
+app.use(ratelimiter({
   duration: 60000,
   max: 100,
   id: function (context) {
@@ -111,13 +111,13 @@ for testing purposes.
 ### Example
 
 ```js
-var ratelimit = require('koa-ratelimit').nullRateLimit;
+var ratelimiter = require('koa-ratelimiter').nullRateLimit;
 var koa = require('koa');
 var app = koa();
 
 // apply rate limit
 
-app.use(ratelimit({}));
+app.use(ratelimiter({}));
 
 // response middleware
 
@@ -141,13 +141,13 @@ To learn more about what a custom adapter should be, please refer to the `rateli
 ### Example
 
 ```js
-var ratelimitFactory = require('koa-ratelimit');
+var ratelimiter = require('koa-ratelimiter');
 var koa = require('koa');
 var app = koa();
 var myCustomAdapter = require('./myCustomAdapter');
 // apply rate limit
 
-app.use(ratelimitFactory(myCustomAdapter)({
+app.use(ratelimiter(myCustomAdapter)({
   duration: 60000,
   max: 100,
   id: function (context) {
