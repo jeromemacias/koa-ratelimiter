@@ -52,16 +52,16 @@ const middlewareFactory = (adapter = memoryAdapter()) => opts => function* middl
     });
 };
 
-export default middlewareFactory;
+middlewareFactory.nullRateLimit = opts => middlewareFactory(nullAdapter())(opts);
 
-export const nullRateLimit = opts => middlewareFactory(nullAdapter())(opts);
+middlewareFactory.memoryRateLimit = opts => middlewareFactory(memoryAdapter())(opts);
 
-export const memoryRateLimit = opts => middlewareFactory(memoryAdapter())(opts);
-
-export const redisRateLimit = opts => {
+middlewareFactory.redisRateLimit = opts => {
     if (!opts || !opts.db) {
         throw new Error('opts.db is required');
     }
 
     return middlewareFactory(redisAdapter(opts.db))(opts);
 };
+
+module.exports = middlewareFactory;

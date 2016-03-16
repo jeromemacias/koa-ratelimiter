@@ -1,7 +1,8 @@
-var ratelimit = require('koa-ratelimiter').redisRateLimit;
-var redis = require('redis');
-var koa = require('koa');
-var app = koa();
+import { redisRateLimit as ratelimit } from 'koa-ratelimiter';
+import redis from 'redis';
+import koa from 'koa';
+
+const app = koa();
 
 // apply rate limit
 app.use(ratelimit({
